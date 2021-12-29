@@ -20,8 +20,11 @@ public class GridMovementBase : MonoBehaviour
 
 
     [Header("Movement")]
+    [SerializeField] GridMovementBase m_partner;
     [SerializeField] Tilemap m_walkableTilemap;
     [SerializeField] protected float m_moveSpeed = 1.0f;
+
+    private bool m_isAtGoal = false;
 
     //Location Data
     protected Direction m_direction;
@@ -33,6 +36,14 @@ public class GridMovementBase : MonoBehaviour
 
     protected Vector3 m_targetPosition;
     protected Vector3 m_intendedTargetPosition;
+
+
+    public void SetAtGoal(bool newAtGoal)
+    {
+        m_isAtGoal = newAtGoal;
+    }
+
+    public bool GetAtGoal() { return m_isAtGoal; }
 
     void Start()
     {
@@ -144,4 +155,6 @@ public class GridMovementBase : MonoBehaviour
     {
         m_position = m_walkableTilemap.WorldToCell(transform.position);
     }
+
+
 }
