@@ -9,9 +9,6 @@ public class LauncherBehavior : MonoBehaviour
     [SerializeField] Tilemap m_walkableTilemap;
     [SerializeField] GameObject m_scaler;
 
-    [Header("Launch Details")]
-    [SerializeField] float m_launchSpeed = 5.0f;
-
     private bool m_hasLaunched = false;
 
     
