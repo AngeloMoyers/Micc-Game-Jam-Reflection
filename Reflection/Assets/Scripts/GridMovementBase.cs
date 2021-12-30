@@ -45,6 +45,12 @@ public class GridMovementBase : MonoBehaviour
 
     public bool GetAtGoal() { return m_isAtGoal; }
 
+    public void SetCanMove(bool newCanMove) { m_canMove = newCanMove; }
+    public bool GetCanMove() { return m_canMove; }
+
+    public void SetTargetPosition(Vector3 newPos) { m_targetPosition = newPos; }
+    public Vector3 GetTargetPosition() { return m_targetPosition; }
+
     void Start()
     {
         m_position = m_walkableTilemap.WorldToCell(transform.position);
