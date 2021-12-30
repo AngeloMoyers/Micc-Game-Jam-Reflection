@@ -7,6 +7,7 @@ public class LauncherBehavior : MonoBehaviour
 {
     [Header("Map")]
     [SerializeField] Tilemap m_walkableTilemap;
+    [SerializeField] GameObject m_scaler;
 
     [Header("Launch Details")]
     [SerializeField] float m_launchSpeed = 5.0f;
@@ -42,7 +43,11 @@ public class LauncherBehavior : MonoBehaviour
         TileBase tempTile = m_walkableTilemap.GetTile(m_walkableTilemap.WorldToCell(transform.position));
         Vector3 lastValidTilePos = m_walkableTilemap.GetCellCenterWorld(m_walkableTilemap.WorldToCell(transform.position));
 
-        Vector3 dir = transform.up;
+        Vector3 dir;
+        if (m_scaler != null)
+            dir = transform.up * m_scaler.transform.localScale.x;
+        else
+            dir = transform.up;
 
         int it = 0;
         while (tempTile != null)
