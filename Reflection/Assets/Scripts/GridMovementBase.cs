@@ -69,6 +69,8 @@ public class GridMovementBase : MonoBehaviour
                 m_canMove = true;
                 UpdatePosition();
 
+                m_animator.SetBool("isWalking", false);
+
                 if (m_isSpinning)
                 {
                     m_isSpinning = false;
@@ -158,6 +160,8 @@ public class GridMovementBase : MonoBehaviour
         {
             m_canMove = false;
             m_targetPosition = m_intendedTargetPosition;
+
+            m_animator.SetBool("isWalking", true);
             return true;
         }
         else
