@@ -32,6 +32,7 @@ public class GridMovementBase : MonoBehaviour
 
     protected bool m_atDestination = false;
     protected bool m_canMove = true;
+    protected bool m_isSpinning = false;
     [SerializeField] protected bool m_controlsInverted = false;
 
     protected Vector3 m_targetPosition;
@@ -51,6 +52,8 @@ public class GridMovementBase : MonoBehaviour
     public void SetTargetPosition(Vector3 newPos) { m_targetPosition = newPos; }
     public Vector3 GetTargetPosition() { return m_targetPosition; }
 
+    public void Spin() { m_animator.SetBool("isSpinning", true); m_isSpinning = true; }
+
     void Start()
     {
         m_position = m_walkableTilemap.WorldToCell(transform.position);
@@ -65,7 +68,14 @@ public class GridMovementBase : MonoBehaviour
             {
                 m_canMove = true;
                 UpdatePosition();
+
+                if (m_isSpinning)
+                {
+                    m_isSpinning = false;
+                    m_animator.SetBool("isSpinning", false);
+                }
             }
+
         }
 
         HandleInput();

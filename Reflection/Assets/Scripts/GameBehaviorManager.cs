@@ -26,7 +26,7 @@ public class GameBehaviorManager : MonoBehaviour
             if (character == null)
                 return false;
 
-            if (!character.GetAtGoal())
+            if (!character.GetAtGoal() && !character.GetCanMove())
                 return false;
         }
 

@@ -38,8 +38,6 @@ public class LauncherBehavior : MonoBehaviour
 
     private void Launch(GridMovementBase character)
     {
-        Debug.Log("Launched" + m_launchSpeed);
-
         Vector3 targetPos = m_walkableTilemap.GetCellCenterWorld(m_walkableTilemap.WorldToCell(transform.position));
         TileBase tempTile = m_walkableTilemap.GetTile(m_walkableTilemap.WorldToCell(transform.position));
         Vector3 lastValidTilePos = m_walkableTilemap.GetCellCenterWorld(m_walkableTilemap.WorldToCell(transform.position));
@@ -60,6 +58,7 @@ public class LauncherBehavior : MonoBehaviour
 
         character.SetCanMove(false);
         character.SetTargetPosition(lastValidTilePos);
+        character.Spin();
 
     }
 }
