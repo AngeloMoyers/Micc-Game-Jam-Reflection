@@ -21,23 +21,29 @@ public class GameBehaviorManager : MonoBehaviour
 
     private bool TestAtGoal()
     {
+        if (m_characters.Length == 0) return false;
         foreach (var character in m_characters)
         {
             if (character == null)
                 return false;
 
-            if (!character.GetAtGoal() && !character.GetCanMove())
+            if (!character.GetAtGoal() || !character.GetCanMove())
                 return false;
         }
 
         return true;
     }
 
-    private void LoadNextLevel()
+    public void LoadNextLevel()
     {
         if (!(SceneManager.GetActiveScene().buildIndex >= SceneManager.sceneCountInBuildSettings - 1))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
+    }
+
+    public void LoadFirstLevel()
+    {
+        SceneManager.LoadScene(1);
     }
 }
