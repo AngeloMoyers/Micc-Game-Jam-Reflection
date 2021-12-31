@@ -25,6 +25,11 @@ public class GridMovementBase : MonoBehaviour
     [SerializeField] Tilemap m_walkableTilemap;
     [SerializeField] protected float m_moveSpeed = 1.0f;
 
+    [Header("Audio")]
+    [SerializeField] AudioClip m_stepSound;
+
+    private AudioSource m_audioSource;
+
     private bool m_isAtGoal = false;
 
     //Location Data
@@ -58,6 +63,8 @@ public class GridMovementBase : MonoBehaviour
     void Start()
     {
         m_position = m_walkableTilemap.WorldToCell(transform.position);
+
+        m_audioSource = GetComponent<AudioSource>();   
     }
 
     void Update()
@@ -167,6 +174,8 @@ public class GridMovementBase : MonoBehaviour
             m_targetPosition = m_intendedTargetPosition;
 
             m_animator.SetBool("isWalking", true);
+
+            m_audioSource.Play();
             return true;
         }
         else
