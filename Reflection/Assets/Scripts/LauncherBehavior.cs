@@ -9,12 +9,13 @@ public class LauncherBehavior : MonoBehaviour
     [SerializeField] Tilemap m_walkableTilemap;
     [SerializeField] GameObject m_scaler;
 
+    AudioSource m_audioSource;
+
     private bool m_hasLaunched = false;
 
-    
-    void Update()
+    private void Start()
     {
-        
+        m_audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -26,6 +27,8 @@ public class LauncherBehavior : MonoBehaviour
         {
             Launch(character);
             m_hasLaunched = true;
+
+            m_audioSource.Play();
         }
     }
 

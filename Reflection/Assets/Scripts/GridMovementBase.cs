@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.Animations;
+using UnityEngine.SceneManagement;
 
 public enum Direction
 { 
@@ -101,6 +102,10 @@ public class GridMovementBase : MonoBehaviour
         {
             Move(Direction.kRight);
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RestartScene();
+        }
     }
 
     protected void Move(Direction dir)
@@ -176,5 +181,9 @@ public class GridMovementBase : MonoBehaviour
         m_position = m_walkableTilemap.WorldToCell(transform.position);
     }
 
+    private void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
 }
