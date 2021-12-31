@@ -28,6 +28,9 @@ public class GridMovementBase : MonoBehaviour
     [Header("Audio")]
     [SerializeField] AudioClip m_stepSound;
 
+    [Header("UI")]
+    [SerializeField] StepCounterBehavior m_stepsText;
+
     private AudioSource m_audioSource;
 
     private bool m_isAtGoal = false;
@@ -44,6 +47,7 @@ public class GridMovementBase : MonoBehaviour
     protected Vector3 m_targetPosition;
     protected Vector3 m_intendedTargetPosition;
 
+    protected int m_steps = 0;
 
     public void SetAtGoal(bool newAtGoal)
     {
@@ -93,19 +97,19 @@ public class GridMovementBase : MonoBehaviour
 
     protected void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             Move(Direction.kUp);
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             Move(Direction.kDown);
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             Move(Direction.kLeft);
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             Move(Direction.kRight);
         }
@@ -118,6 +122,10 @@ public class GridMovementBase : MonoBehaviour
     protected void Move(Direction dir)
     {
         if (!m_canMove) return;
+
+        if(m_stepsText != null)
+            m_stepsText.ChangeSore(++m_steps);
+
         switch (dir)
         {
             case Direction.kLeft:
